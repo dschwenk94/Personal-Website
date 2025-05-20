@@ -240,8 +240,8 @@ const ProjectsPage = () => {
             <ImageColumn>
               <ProjectImage>
                 <StyledImg 
-                  src="/sling-before.jpg" 
-                  alt="Sling TV mobile web interface showing LiveNOW from FOX" 
+                  src="/sling-before.svg" 
+                  alt="Sling TV mobile web interface before optimization" 
                 />
               </ProjectImage>
               <ImageLabel>BEFORE: Mobile Web Unsupported</ImageLabel>
@@ -255,8 +255,8 @@ const ProjectsPage = () => {
             <ImageColumn>
               <ProjectImage>
                 <StyledImg 
-                  src="/sling-after.jpg" 
-                  alt="Sling TV app download screen" 
+                  src="/sling-after.svg" 
+                  alt="Sling TV mobile web interface after optimization" 
                 />
               </ProjectImage>
               <ImageLabel>AFTER: Mobile Web Supported</ImageLabel>
