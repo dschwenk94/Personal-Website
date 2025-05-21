@@ -88,7 +88,7 @@ const LinkedInLink = styled.a`
 `;
 
 const EmailLink = styled.a`
-  color: ${({ theme }) => theme.colors.text};
+  color: #0077B5; /* Using LinkedIn blue to indicate it's a hyperlink */
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: ${({ theme }) => theme.fontWeights.medium};
@@ -107,12 +107,12 @@ const HomePage = () => {
         <TopSection>
           <MainHeading>
             <HeadingText>
-              Instead of business buzzwords and AI fluff, I'll be honest:
+              Instead of buzzwords and AI fluff, here's some honesty:
             </HeadingText>
             <SubHeading style={{ fontStyle: 'normal', fontSize: '1.3rem', lineHeight: '1.6', marginTop: '1.5rem', fontWeight: '400' }}>
               This website is an ongoing attempt at using AI tools and some determination to build something of my own, while also highlighting some of the work I've done professionally.
               <br /><br />
-              I'm a guy who lives in Colorado and enjoys most of the stereotypical outdoor things a guy in Colorado likes to do, and a product manager who has spent his career solving customer problems and delivering results in streaming & media.
+              My name's Davis, and I'm a guy living in Colorado with my wife and dog, and a product manager who has spent his career solving customer problems and delivering results in streaming & media.
               <br /><br />
               While the coding was done by Claude (and assisted by MCP integrations), all the words are my own.
             </SubHeading>
