@@ -3,7 +3,7 @@ const theme = {
   colors: {
     backgroundGradientStart: '#111111', // Black start of gradient
     backgroundGradientEnd: '#333333',   // Dark grey end of gradient
-    text: '#FFFFFF',                    // White text
+    text: '#FAFAFA',                    // Nearly white grey for optimal readability
     primary: '#FF5722',                 // Orange/rust accent color
     secondary: '#E64A19',               // Darker orange/rust for hover states
     accent: '#FFCCBC',                  // Light orange for subtle accents
