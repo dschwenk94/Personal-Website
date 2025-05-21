@@ -1,4 +1,4 @@
-// Updated theme with modern, sleek fonts and refined color scheme
+// Theme configuration for styled-components
 const theme = {
   colors: {
     backgroundGradientStart: '#111111', // Black start of gradient
@@ -7,48 +7,44 @@ const theme = {
     primary: '#FF5722',                 // Orange/rust accent color
     secondary: '#E64A19',               // Darker orange/rust for hover states
     accent: '#FFCCBC',                  // Light orange for subtle accents
-    darkText: '#212121',                // Near black for contrast text
-    cardBackground: 'rgba(51, 51, 51, 0.7)', // Semi-transparent dark grey for cards
-  },
-  fonts: {
-    main: "'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-    heading: "'Clash Display', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-    monospace: "'JetBrains Mono', monospace",
   },
   fontWeights: {
     light: 300,
-    regular: 400,
+    normal: 400,
     medium: 500,
     semibold: 600,
     bold: 700,
   },
   spacing: {
-    xs: '0.25rem',
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '2rem',
-    xl: '3rem',
+    xs: '0.25rem',   // 4px
+    sm: '0.5rem',     // 8px
+    md: '1rem',       // 16px
+    lg: '2rem',       // 32px
+    xl: '3rem',       // 48px
+    xxl: '4rem',      // 64px
   },
   breakpoints: {
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px',
-  },
-  borderRadius: {
-    sm: '4px',
-    md: '8px',
-    lg: '16px',
-    full: '9999px',
+    xs: '480px',      // Mobile phones
+    sm: '768px',      // Tablets
+    md: '992px',      // Small desktops
+    lg: '1200px',     // Large desktops
   },
   transition: {
     default: '0.3s ease',
-    fast: '0.15s ease',
     slow: '0.5s ease',
+    fast: '0.15s ease',
   },
-  gradients: {
-    main: 'linear-gradient(to right, #111111, #333333)',
-  }
+  borderRadius: {
+    small: '4px',
+    medium: '8px',
+    large: '16px',
+    circle: '50%',
+  },
+  shadows: {
+    small: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    medium: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    large: '0 8px 16px rgba(0, 0, 0, 0.3)',
+  },
 };
 
 export default theme;

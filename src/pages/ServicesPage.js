@@ -6,6 +6,9 @@ const ServicesContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.lg};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 const ServicesTitle = styled.h1`
@@ -14,37 +17,44 @@ const ServicesTitle = styled.h1`
   font-size: 2.5rem;
   letter-spacing: 1px;
   font-weight: normal;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.7); /* Stronger shadow */
 `;
 
 const ServicesList = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xl};
-  max-width: 800px;
 `;
 
 const ServiceItem = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: ${({ theme }) => theme.spacing.xl};
+  
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const ServiceTitle = styled.h2`
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 1.8rem;
   margin-bottom: ${({ theme }) => theme.spacing.md};
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: normal;
 `;
 
 const ServiceDescription = styled.p`
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.md};
   line-height: 1.8;
   letter-spacing: 0.3px;
   font-size: 1.1rem;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6); /* Stronger shadow */
 `;
 
 const ContactSection = styled.div`
   margin-top: ${({ theme }) => theme.spacing.xxl};
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: ${({ theme }) => theme.spacing.xl};
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
 const ContactHeading = styled.h2`
@@ -52,20 +62,20 @@ const ContactHeading = styled.h2`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   font-weight: normal;
   letter-spacing: 0.5px;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.7); /* Stronger shadow */
 `;
 
 const ContactText = styled.p`
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  color: ${({ theme }) => theme.colors.text};
   line-height: 1.8;
   letter-spacing: 0.3px;
   font-size: 1.1rem;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6); /* Stronger shadow */
 `;
 
 const ContactLink = styled.a`
   color: ${({ theme }) => theme.colors.primary};
-  display: inline-block;
-  letter-spacing: 0.3px;
-  font-size: 1.1rem;
+  text-decoration: none;
   
   &:hover {
     text-decoration: underline;
@@ -76,55 +86,46 @@ const ServicesPage = () => {
   return (
     <PageWrapper>
       <ServicesContainer>
-      <ServicesTitle>Services</ServicesTitle>
-      <ServicesList>
-        <ServiceItem>
-          <ServiceTitle>Product Strategy Consulting</ServiceTitle>
-          <ServiceDescription>
-            Development of comprehensive product strategies aligned with business goals.
-            Includes market analysis, user research, and roadmap planning to ensure your
-            product meets both user needs and business objectives.
-          </ServiceDescription>
-        </ServiceItem>
+        <ServicesTitle>Services</ServicesTitle>
         
-        <ServiceItem>
-          <ServiceTitle>Monetization Optimization</ServiceTitle>
-          <ServiceDescription>
-            Expert analysis and recommendations for improving subscription conversion rates,
-            in-app purchases, and overall revenue generation from digital products. Focused on
-            sustainable growth strategies that maintain user satisfaction.
-          </ServiceDescription>
-        </ServiceItem>
+        <ServicesList>
+          <ServiceItem>
+            <ServiceTitle>Product Strategy & Roadmapping</ServiceTitle>
+            <ServiceDescription>
+              Strategic product planning and roadmap development to align business goals with user needs. 
+              I help organizations define clear product vision and prioritize features based on impact and 
+              feasibility.
+            </ServiceDescription>
+          </ServiceItem>
+          
+          <ServiceItem>
+            <ServiceTitle>Subscription & Monetization Optimization</ServiceTitle>
+            <ServiceDescription>
+              Expert guidance in creating and optimizing subscription models, pricing strategies, and 
+              conversion funnels. Using data-driven approaches to increase conversion rates, reduce churn, 
+              and maximize lifetime value through targeted testing and experimentation.
+            </ServiceDescription>
+          </ServiceItem>
+          
+          <ServiceItem>
+            <ServiceTitle>Mobile App Strategy</ServiceTitle>
+            <ServiceDescription>
+              Specialized consultation for mobile app strategy, from in-app purchase flows to mobile-specific 
+              user experience. Incorporate platform-specific best practices, billing integrations, and 
+              performance optimization for iOS and Android ecosystems.
+            </ServiceDescription>
+          </ServiceItem>
+        </ServicesList>
         
-        <ServiceItem>
-          <ServiceTitle>User Experience Audit</ServiceTitle>
-          <ServiceDescription>
-            In-depth evaluation of your existing digital products to identify friction points
-            and opportunities for enhanced user experience and increased engagement. Includes
-            detailed reports and actionable recommendations.
-          </ServiceDescription>
-        </ServiceItem>
-        
-        <ServiceItem>
-          <ServiceTitle>Product Team Coaching</ServiceTitle>
-          <ServiceDescription>
-            Mentorship and training for product teams looking to improve their processes and outcomes.
-            Focuses on product discovery, prioritization frameworks, and effective stakeholder management.
-          </ServiceDescription>
-        </ServiceItem>
-      </ServicesList>
-      
-      <ContactSection>
-        <ContactHeading>Interested in working together?</ContactHeading>
-        <ContactText>
-          Let's discuss how I can help your business achieve its goals. 
-          Get in touch via email and we can schedule a consultation.
-        </ContactText>
-        <ContactLink href="mailto:schwenkedavis@gmail.com">
-          schwenkedavis@gmail.com
-        </ContactLink>
-      </ContactSection>
-    </ServicesContainer>
+        <ContactSection>
+          <ContactHeading>Get in Touch</ContactHeading>
+          <ContactText>
+            If you're interested in working together or have questions about how I can help your 
+            organization, feel free to reach out at{' '}
+            <ContactLink href="mailto:schwenkedavis@gmail.com">schwenkedavis@gmail.com</ContactLink>
+          </ContactText>
+        </ContactSection>
+      </ServicesContainer>
     </PageWrapper>
   );
 };

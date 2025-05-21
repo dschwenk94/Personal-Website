@@ -5,18 +5,16 @@ import AnimatedStarryNight from './background/StarryNight';
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
 `;
 
 const BackgroundContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(to right, #111111, #333333);
+  background: linear-gradient(to right, #0e0e0e, #252525); /* Slightly darker background */
 `;
 
 const ContentContainer = styled.div`
@@ -28,11 +26,9 @@ const PageWrapper = React.memo(({ children }) => {
   return (
     <Wrapper>
       <BackgroundContainer>
-        <AnimatedStarryNight count={400} />
+        <AnimatedStarryNight />
       </BackgroundContainer>
-      <ContentContainer>
-        {children}
-      </ContentContainer>
+      <ContentContainer>{children}</ContentContainer>
     </Wrapper>
   );
 });

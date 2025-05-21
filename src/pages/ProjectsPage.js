@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PageWrapper from '../components/PageWrapper';
-// Using direct URLs to the images instead of importing them
-// We'll use public folder for these images
 
 const ProjectsContainer = styled.div`
   max-width: 1200px;
@@ -25,22 +23,27 @@ const ProjectsTitle = styled.h1`
 const ProjectsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
-  max-width: 100%;
+  gap: ${({ theme }) => theme.spacing.xxl};
 `;
 
 const ProjectItem = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.xxl};
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: ${({ theme }) => theme.spacing.xxl};
+  
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const ProjectTitle = styled.h2`
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 2rem;
   margin-bottom: ${({ theme }) => theme.spacing.md};
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: normal;
 `;
 
 const ProjectDescription = styled.p`
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.md};
   line-height: 1.8;
   letter-spacing: 0.3px;
@@ -50,35 +53,37 @@ const ProjectDescription = styled.p`
 
 const ProjectTags = styled.div`
   display: flex;
-  flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  flex-wrap: wrap;
+`;
+
+const TagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.xs};
   margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const ProjectTag = styled.span`
+const Tag = styled.span`
+  background-color: rgba(255, 87, 34, 0.2);
   color: ${({ theme }) => theme.colors.primary};
-  margin-right: ${({ theme }) => theme.spacing.sm};
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
-  
-  &:not(:last-child)::after {
-    content: '•';
-    margin-left: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text};
-  }
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+  border-radius: 4px;
+  font-size: 0.85rem;
+  display: inline-block;
 `;
 
 const ProjectLink = styled.a`
-  color: ${({ theme }) => theme.colors.text};
-  display: inline-block;
+  color: ${({ theme }) => theme.colors.primary};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
   margin-top: ${({ theme }) => theme.spacing.sm};
-  letter-spacing: 0.3px;
-  transition: all ${({ theme }) => theme.transition.default};
-  text-decoration: underline;
-  text-decoration-color: ${({ theme }) => theme.colors.primary};
   
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+    text-decoration: underline;
   }
 `;
 
@@ -112,12 +117,12 @@ const ImageColumn = styled.div`
 `;
 
 const ProjectImage = styled.div`
-  flex: 0 0 auto;
-  width: 130px;
-  height: 250px;
-  background-color: #191B22;
-  border-radius: 15px;
+  width: 140px;
+  height: 280px;
   overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
@@ -135,18 +140,19 @@ const StyledImg = styled.img`
 `;
 
 const ImageLabel = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.md};
-  font-weight: 600;
   color: ${({ theme }) => theme.colors.primary};
-  font-size: 1.1rem;
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: 0.85rem;
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  text-align: center;
 `;
 
 const ImageDescription = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.text};
   font-size: 0.8rem;
   max-width: 130px;
   line-height: 1.4;
-  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 `;
 
 const Arrow = styled.div`
@@ -165,257 +171,183 @@ const Arrow = styled.div`
   }
 `;
 
-const ProjectStats = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.lg};
-  margin-top: ${({ theme }) => theme.spacing.lg};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.sm};
-  }
-`;
-
-const StatItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const StatValue = styled.span`
-  font-size: 2rem;
-  color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
-`;
-
-const StatLabel = styled.span`
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.text};
-  opacity: 0.8;
-`;
-
-const TagsContainer = styled.div`
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
-`;
-
-const Tag = styled.div`
-  color: ${({ theme }) => theme.colors.primary};
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  
-  &:not(:last-child):after {
-    content: "•";
-    color: ${({ theme }) => theme.colors.text};
-    margin-left: 12px;
-  }
-`;
-
 const ProjectsPage = () => {
   return (
     <PageWrapper>
       <ProjectsContainer>
-      <ProjectsTitle>Projects</ProjectsTitle>
-      <ProjectsList>
-        {/* AI-Powered Personal Website */}
-        <ProjectItem>
-          <ProjectTitle>This Website</ProjectTitle>
-          <TagsContainer>
-            <Tag>React</Tag>
-            <Tag>Styled Components</Tag>
-            <Tag>Claude</Tag>
-            <Tag>Model Context Protocol</Tag>
-          </TagsContainer>
-          <ProjectDescription>
-            It seems like everyone's saying that as a product manager, you need to start building with AI tools, or you're going to get left behind. So I started this project of building a React site with the help of an AI assistant, Claude.
-          </ProjectDescription>
-          <ProjectDescription>
-            The coolest part was using MCP integrations that let Claude directly access my files and GitHub repo - essentially pair programming together in real-time, with Claude making changes and me trying to understand them as we went.
-          </ProjectDescription>
-          <ProjectLink href="https://github.com/dschwenk94/Personal-Website" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </ProjectLink>
-        </ProjectItem>
+        <ProjectsTitle>Projects</ProjectsTitle>
         
-        {/* watch.sling.com Mobile Web Support */}
-        <ProjectItem>
-          <ProjectTitle>watch.sling.com Mobile Web Optimization</ProjectTitle>
-          <TagsContainer>
-            <Tag>ReactJS</Tag>
-            <Tag>Mobile Web</Tag>
-            <Tag>Responsive Design</Tag>
-            <Tag>SEO</Tag>
-          </TagsContainer>
-          <ProjectDescription>
-            Led the initiative to open watch.sling.com to mobile device users, including both Sling Freestream and paid subscribers. 
-            Previously, the ReactJS-based streaming platform was only accessible on desktop browsers. Our team implemented responsive design patterns, 
-            optimized streaming performance, and enhanced the user experience specifically for mobile users.
-          </ProjectDescription>
+        <ProjectsList>
+          {/* AI-Powered Personal Website */}
+          <ProjectItem>
+            <ProjectTitle>This Website</ProjectTitle>
+            <TagsContainer>
+              <Tag>React</Tag>
+              <Tag>Styled Components</Tag>
+              <Tag>Claude</Tag>
+              <Tag>Model Context Protocol</Tag>
+            </TagsContainer>
+            <ProjectDescription>
+              It seems like everyone's saying that as a product manager, you need to start building with AI tools, or you're going to get left behind. So I started this project of building a React site with the help of an AI assistant, Claude.
+            </ProjectDescription>
+            <ProjectDescription>
+              The coolest part was using MCP integrations that let Claude directly access my files and GitHub repo - essentially pair programming together in real-time, with Claude making changes and me trying to understand them as we went.
+            </ProjectDescription>
+            <ProjectLink href="https://github.com/dschwenk94/Personal-Website" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </ProjectLink>
+          </ProjectItem>
           
-          <ProjectImageContainer>
-            <ImageColumn>
-              <ProjectImage>
-                <StyledImg 
-                  src="/sling-before.jpg" 
-                  alt="Screenshot of Sling TV's mobile web interface before optimization showing a disabled streaming view" 
-                  loading="lazy" 
-                />
-              </ProjectImage>
-              <ImageLabel>BEFORE: Mobile Web Unsupported</ImageLabel>
-              <ImageDescription>
-                Previously, mobile users would see the Sling interface but couldn't stream content on mobile web
-              </ImageDescription>
-            </ImageColumn>
+          {/* ReactJS Browser Player (watch.sling.com) */}
+          <ProjectItem>
+            <ProjectTitle>ReactJS Browser Player</ProjectTitle>
+            <TagsContainer>
+              <Tag>React</Tag>
+              <Tag>Redux</Tag>
+              <Tag>Video Streaming</Tag>
+              <Tag>Responsive Design</Tag>
+              <Tag>SEO</Tag>
+            </TagsContainer>
+            <ProjectDescription>
+              Led development of Sling TV's browser-based streaming player at watch.sling.com, focusing on mobile optimization 
+              and responsive design to enhance cross-platform compatibility and user experience.
+            </ProjectDescription>
+            <ProjectDescription>
+              Implemented SEO improvements and conversion-focused payment flows, resulting in a 22% increase in time spent streaming 
+              and a 180% increase in subscriptions sold through the platform year-over-year.
+            </ProjectDescription>
             
-            <Arrow>→</Arrow>
+            <ProjectImageContainer>
+              <ImageColumn>
+                <ProjectImage>
+                  <StyledImg 
+                    src="/sling-before.jpg" 
+                    alt="Screenshot of Sling TV's mobile web interface before optimization showing a disabled streaming view" 
+                    loading="lazy" 
+                  />
+                </ProjectImage>
+                <ImageLabel>BEFORE: Mobile Web Unsupported</ImageLabel>
+                <ImageDescription>
+                  Mobile users were redirected to download apps instead of streaming in browser
+                </ImageDescription>
+              </ImageColumn>
+              
+              <Arrow>→</Arrow>
+              
+              <ImageColumn>
+                <ProjectImage>
+                  <StyledImg 
+                    src="/sling-after.jpg" 
+                    alt="Screenshot of Sling TV's mobile web interface after optimization showing enabled streaming view" 
+                    loading="lazy" 
+                  />
+                </ProjectImage>
+                <ImageLabel>AFTER: Mobile Web Supported</ImageLabel>
+                <ImageDescription>
+                  Optimized player with responsive controls for all mobile browsers
+                </ImageDescription>
+              </ImageColumn>
+            </ProjectImageContainer>
             
-            <ImageColumn>
-              <ProjectImage>
-                <StyledImg 
-                  src="/sling-after.jpg" 
-                  alt="Screenshot of Sling TV's mobile web interface after optimization showing enabled streaming view" 
-                  loading="lazy" 
-                />
-              </ProjectImage>
-              <ImageLabel>AFTER: Mobile Web Supported</ImageLabel>
-              <ImageDescription>
-                After our optimization, users could stream directly from their mobile browser without requiring app installation
-              </ImageDescription>
-            </ImageColumn>
-          </ProjectImageContainer>
+            <ProjectDescription>
+              Key achievements included creating adaptive layouts for various screen sizes, implementing mobile-specific video player 
+              controls, and optimizing streaming quality based on network conditions to reduce buffering and improve playback performance.
+            </ProjectDescription>
+          </ProjectItem>
           
-          <ProjectDescription>
-            The project involved significant technical challenges including optimizing video playback for mobile bandwidths, 
-            reworking UI components for touch interfaces, and ensuring cross-browser compatibility. We also implemented 
-            new acquisition flows designed specifically for mobile users, resulting in a significant increase in conversions.
-          </ProjectDescription>
-          
-          <ProjectStats>
-            <StatItem>
-              <StatValue>22%</StatValue>
-              <StatLabel>Increase in streaming time (YoY)</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatValue>180%</StatValue>
-              <StatLabel>Increase in subscriptions sold onsite (YoY)</StatLabel>
-            </StatItem>
-          </ProjectStats>
-          
-          <ProjectLink href="https://watch.sling.com" target="_blank" rel="noopener noreferrer">
-            Visit Site
-          </ProjectLink>
-        </ProjectItem>
-        
-        {/* In-App Purchase Optimization */}
-        <ProjectItem>
-          <ProjectTitle>In-App Purchase Optimization</ProjectTitle>
-          <TagsContainer>
-            <Tag>Mobile</Tag>
-            <Tag>iOS</Tag>
-            <Tag>Android</Tag>
-            <Tag>In-app payment integrations</Tag>
-            <Tag>React Native</Tag>
-          </TagsContainer>
-          <ProjectDescription>
-            Redesigned purchase flows resulting in 25% higher conversion rates and improved user satisfaction scores. 
-            Implemented A/B testing framework to continuously optimize the conversion funnel and increase revenue through 
-            content-driven iOS & Android mobile purchase flows using Apple & Google billing integrations.
-          </ProjectDescription>
-          
-          <ProjectImageContainer>
-            <ImageColumn>
-              <ProjectImage>
-                <StyledImg 
-                  src="/images/sling-search.jpg" 
-                  alt="Screenshot of Sling TV search interface showing ESPN search results" 
-                  loading="lazy" 
-                />
-              </ProjectImage>
-              <ImageLabel>1. Content Discovery</ImageLabel>
-              <ImageDescription>
-                Users search for their favorite content
-              </ImageDescription>
-            </ImageColumn>
+          {/* In-App Purchase Flow Optimization */}
+          <ProjectItem>
+            <ProjectTitle>In-App Purchase Flow Optimization</ProjectTitle>
+            <TagsContainer>
+              <Tag>Mobile</Tag>
+              <Tag>iOS</Tag>
+              <Tag>Android</Tag>
+              <Tag>A/B Testing</Tag>
+              <Tag>Monetization</Tag>
+              <Tag>Apple StoreKit</Tag>
+              <Tag>Google Play Billing</Tag>
+            </TagsContainer>
+            <ProjectDescription>
+              Led the development and optimization of in-app purchase flows for Sling TV's mobile applications, creating seamless 
+              paths from content discovery to subscription purchase that generated over 50,000 annual subscription purchases.
+            </ProjectDescription>
+            <ProjectDescription>
+              Implemented A/B testing framework to continuously optimize the conversion funnel and increase revenue through 
+              content-driven iOS & Android mobile purchase flows using Apple & Google billing integrations.
+            </ProjectDescription>
             
-            <Arrow>→</Arrow>
+            <ProjectImageContainer>
+              <ImageColumn>
+                <ProjectImage>
+                  <StyledImg 
+                    src="/images/sling-search.jpg" 
+                    alt="Screenshot of Sling TV search interface showing ESPN search results" 
+                    loading="lazy" 
+                  />
+                </ProjectImage>
+                <ImageLabel>1. Content Discovery</ImageLabel>
+                <ImageDescription>
+                  Users search for their favorite content
+                </ImageDescription>
+              </ImageColumn>
+              
+              <Arrow>→</Arrow>
+              
+              <ImageColumn>
+                <ProjectImage>
+                  <StyledImg 
+                    src="/images/sling-sportscenter.jpg" 
+                    alt="Screenshot of SportsCenter show details page with subscription options" 
+                    loading="lazy" 
+                  />
+                </ProjectImage>
+                <ImageLabel>1.1. Content Details</ImageLabel>
+                <ImageDescription>
+                  Show details with subscription options
+                </ImageDescription>
+              </ImageColumn>
+              
+              <Arrow>→</Arrow>
+              
+              <ImageColumn>
+                <ProjectImage>
+                  <StyledImg 
+                    src="/images/sling-signup.jpg" 
+                    alt="Screenshot of Sling TV account creation page with email and password fields" 
+                    loading="lazy" 
+                  />
+                </ProjectImage>
+                <ImageLabel>2. Account Creation</ImageLabel>
+                <ImageDescription>
+                  Streamlined sign-up experience
+                </ImageDescription>
+              </ImageColumn>
+              
+              <Arrow>→</Arrow>
+              
+              <ImageColumn>
+                <ProjectImage>
+                  <StyledImg 
+                    src="/images/sling-purchase.jpg" 
+                    alt="Screenshot of Sling TV purchase confirmation showing subscription details and payment information" 
+                    loading="lazy" 
+                  />
+                </ProjectImage>
+                <ImageLabel>3. Purchase Confirmation</ImageLabel>
+                <ImageDescription>
+                  Apple/Google billing integration
+                </ImageDescription>
+              </ImageColumn>
+            </ProjectImageContainer>
             
-            <ImageColumn>
-              <ProjectImage>
-                <StyledImg 
-                  src="/images/sling-sportscenter.jpg" 
-                  alt="Screenshot of SportsCenter show details page with subscription options" 
-                  loading="lazy" 
-                />
-              </ProjectImage>
-              <ImageLabel>1.1. Content Details</ImageLabel>
-              <ImageDescription>
-                Show details with subscription options
-              </ImageDescription>
-            </ImageColumn>
-            
-            <Arrow>→</Arrow>
-            
-            <ImageColumn>
-              <ProjectImage>
-                <StyledImg 
-                  src="/images/sling-signup.jpg" 
-                  alt="Screenshot of Sling TV account creation page with email and password fields" 
-                  loading="lazy" 
-                />
-              </ProjectImage>
-              <ImageLabel>2. Account Creation</ImageLabel>
-              <ImageDescription>
-                Streamlined sign-up experience
-              </ImageDescription>
-            </ImageColumn>
-            
-            <Arrow>→</Arrow>
-            
-            <ImageColumn>
-              <ProjectImage>
-                <StyledImg 
-                  src="/images/sling-purchase.jpg" 
-                  alt="Screenshot of Sling TV purchase confirmation showing subscription details and payment information" 
-                  loading="lazy" 
-                />
-              </ProjectImage>
-              <ImageLabel>3. Purchase Confirmation</ImageLabel>
-              <ImageDescription>
-                Apple/Google billing integration
-              </ImageDescription>
-            </ImageColumn>
-          </ProjectImageContainer>
-          
-          <ProjectDescription>
-            Released content-driven mobile purchase flows optimized for user conversion. Improved and expanded capabilities through 
-            in-app offers and experimentation, focusing on data-driven decisions to maximize both new subscription acquisition 
-            and existing customer upsells.
-          </ProjectDescription>
-          
-          <ProjectStats>
-            <StatItem>
-              <StatValue>50k+</StatValue>
-              <StatLabel>Annual subscription purchases</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatValue>$2M+</StatValue>
-              <StatLabel>Estimated annual value creation</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatValue>18%</StatValue>
-              <StatLabel>YoY increase in subscriptions purchased</StatLabel>
-            </StatItem>
-          </ProjectStats>
-          <ProjectLink href="#" target="_blank" rel="noopener noreferrer">
-            View Project
-          </ProjectLink>
-        </ProjectItem>
-      </ProjectsList>
-    </ProjectsContainer>
+            <ProjectDescription>
+              Released content-driven mobile purchase flows optimized for user conversion. Improved and expanded capabilities through 
+              in-app offers and experimentation, focusing on data-driven decisions to maximize both new subscription acquisition 
+              and existing customer upsell opportunities.
+            </ProjectDescription>
+          </ProjectItem>
+        </ProjectsList>
+      </ProjectsContainer>
     </PageWrapper>
   );
 };

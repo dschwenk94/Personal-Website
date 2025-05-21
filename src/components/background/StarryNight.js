@@ -1,54 +1,57 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import styled from 'styled-components';
 
-// Container for the static (non-animated) starry night background
+// Container for the static starry night background
 const StaticStarryNightContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -5;
   pointer-events: none;
+  z-index: -1;
 `;
 
 const Star = styled.div`
   position: absolute;
-  background-color: #FFFFFF;
+  background-color: rgba(255, 243, 204, 0.5); /* Reduced opacity from 0.9 to 0.5 */
   border-radius: 50%;
   opacity: ${props => props.opacity};
   width: ${props => props.size}px;
   height: ${props => props.size}px;
-  animation: twinkle ${props => props.duration}s ease-in-out infinite;
   top: ${props => props.top}%;
   left: ${props => props.left}%;
+  box-shadow: 0 0 ${props => props.size * 3}px ${props => props.size}px rgba(255, 255, 255, 0.8);
+  animation: ${props => (props.twinkle ? 'twinkle' : 'none')} ${props => props.duration}s ease-in-out infinite;
   
   @keyframes twinkle {
-    0% { opacity: ${props => props.opacity * 0.4}; }
-    50% { opacity: ${props => props.opacity}; }
-    100% { opacity: ${props => props.opacity * 0.4}; }
+    0% { opacity: ${props => props.opacity}; }
+    50% { opacity: ${props => props.opacity * 0.1}; }
+    100% { opacity: ${props => props.opacity}; }
   }
 `;
 
-const generateStars = (count) => {
-  const stars = [];
-  for (let i = 0; i < count; i++) {
-    stars.push({
-      id: i,
-      size: Math.random() * 2 + 0.5, // Size between 0.5 and 2.5px
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      opacity: Math.random() * 0.6 + 0.3, // Opacity between 0.3 and 0.9
-      duration: Math.random() * 10 + 5, // Animation duration between 5 and 15 seconds
-    });
-  }
-  return stars;
-};
-
-// Static Starry Night Component (for Work History page)
+// Static Starry Night Component based on pre-rendered CSS stars
 export const StaticStarryNight = memo(({ starCount = 200 }) => {
-  const stars = useRef(generateStars(starCount)).current;
+  const [stars, setStars] = useState([]);
+  
+  useEffect(() => {
+    // Generate random stars on mount
+    const newStars = [];
+    for (let i = 0; i < starCount; i++) {
+      newStars.push({
+        id: i,
+        size: Math.random() * 1.8 + 0.2, // 0.2 to 2.0 pixels
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        opacity: Math.random() * 0.5 + 0.5, // 0.5 to 1.0 opacity
+        twinkle: Math.random() > 0.7, // 30% of stars twinkle
+        duration: Math.random() * 10 + 5 // 5-15 second twinkle duration
+      });
+    }
+    setStars(newStars);
+  }, [starCount]);
   
   return (
     <StaticStarryNightContainer>
@@ -59,6 +62,7 @@ export const StaticStarryNight = memo(({ starCount = 200 }) => {
           top={star.top}
           left={star.left}
           opacity={star.opacity}
+          twinkle={star.twinkle}
           duration={star.duration}
         />
       ))}
@@ -68,26 +72,24 @@ export const StaticStarryNight = memo(({ starCount = 200 }) => {
 
 // Container for the animated starry night background
 const AnimatedStarryNightContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -5;
-  pointer-events: none;
-`;
-
-const Canvas = styled.canvas`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+`;
+
+const Canvas = styled.canvas`
+  display: block;
+  width: 100%;
+  height: 100%;
 `;
 
 // Animated Starry Night Component based on GitHub repo
-const AnimatedStarryNight = memo(({ count = 400 }) => {
+const AnimatedStarryNight = memo(({ count = 400, isHeader = false }) => {
   const canvasRef = useRef(null);
   const starsRef = useRef([]);
   const requestIdRef = useRef(null);
@@ -95,25 +97,26 @@ const AnimatedStarryNight = memo(({ count = 400 }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
     
     // Set canvas dimensions
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = isHeader ? 80 : window.innerHeight; // Fixed height for header
       initStars(); // Recreate stars on resize
     };
     
     // Star properties
     const initStars = () => {
       const stars = [];
+      const areaHeight = isHeader ? 80 : canvas.height;
+      
       for (let i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          y: Math.random() * areaHeight,
           radius: Math.random() * 1.5 + 0.5,
-          vx: Math.floor(Math.random() * 20) - 10, // Reduced from (-25,25) to (-10,10)
-          vy: Math.floor(Math.random() * 20) - 10  // Reduced from (-25,25) to (-10,10)
+          vx: Math.floor(Math.random() * 10) - 5, // Reduced velocity for header
+          vy: Math.floor(Math.random() * 10) - 5  // Reduced velocity for header
         });
       }
       starsRef.current = stars;
@@ -122,7 +125,7 @@ const AnimatedStarryNight = memo(({ count = 400 }) => {
     // Draw individual star
     const drawStar = (star) => {
       ctx.save();
-      ctx.fillStyle = '#FFF';
+      ctx.fillStyle = 'rgba(255, 243, 204, ' + (0.4 + Math.random() * 0.2) + ')'; // Reduced opacity
       ctx.beginPath();
       ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
       ctx.fill();
@@ -131,15 +134,17 @@ const AnimatedStarryNight = memo(({ count = 400 }) => {
     
     // Update star position
     const updateStar = (star) => {
-    star.x += star.vx / 300; // Slowed down from 100 to 300
-    star.y += star.vy / 300; // Slowed down from 100 to 300
+      // Slower movement for all stars
+      star.x += star.vx / 600; 
+      star.y += star.vy / 600;
       
       // Bounce from edges
       if (star.x - star.radius < 0 || star.x + star.radius > canvas.width) {
         star.vx = -star.vx;
       }
       
-      if (star.y - star.radius < 0 || star.y + star.radius > canvas.height) {
+      const maxHeight = isHeader ? 80 : canvas.height;
+      if (star.y - star.radius < 0 || star.y + star.radius > maxHeight) {
         star.vy = -star.vy;
       }
     };
@@ -148,6 +153,7 @@ const AnimatedStarryNight = memo(({ count = 400 }) => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
+      // Draw and update all stars
       starsRef.current.forEach(star => {
         drawStar(star);
         updateStar(star);
@@ -156,21 +162,19 @@ const AnimatedStarryNight = memo(({ count = 400 }) => {
       requestIdRef.current = requestAnimationFrame(animate);
     };
     
-    // Initialize
+    // Initialize everything
     window.addEventListener('resize', handleResize);
-    handleResize();
+    handleResize(); // Initial sizing
+    animate(); // Start animation loop
     
-    // Start animation
-    animate();
-    
-    // Cleanup
+    // Cleanup on unmount
     return () => {
       window.removeEventListener('resize', handleResize);
       if (requestIdRef.current) {
         cancelAnimationFrame(requestIdRef.current);
       }
     };
-  }, [count]);
+  }, [count, isHeader]);
   
   return (
     <AnimatedStarryNightContainer>

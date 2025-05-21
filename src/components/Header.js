@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
-  background-color: rgba(0, 0, 0, 0.6);
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 100;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 const HeaderContent = styled.div`
@@ -20,15 +20,14 @@ const HeaderContent = styled.div`
   align-items: center;
 `;
 
-const Logo = styled(Link)`
-  font-family: ${({ theme }) => theme.fonts.heading};
+const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text};
-  letter-spacing: 1px;
   
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 `;
 
@@ -36,63 +35,62 @@ const Nav = styled.nav`
   display: flex;
   gap: ${({ theme }) => theme.spacing.md};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     gap: ${({ theme }) => theme.spacing.sm};
   }
 `;
 
 const NavLink = styled(Link)`
-  color: ${({ theme, active }) => active ? theme.colors.primary : theme.colors.text};
-  font-weight: ${({ active, theme }) => active ? theme.fontWeights.medium : theme.fontWeights.regular};
-  font-family: ${({ theme }) => theme.fonts.main};
+  color: ${({ theme }) => theme.colors.text};
+  text-decoration: none;
   position: relative;
   padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-  letter-spacing: 0.02em;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  transition: all ${({ theme }) => theme.transition.default};
+  font-size: 1rem;
   
-  &:after {
+  &::after {
     content: '';
     position: absolute;
-    bottom: -5px;
     left: 0;
-    width: 100%;
+    bottom: -4px;
+    width: ${({ isActive }) => (isActive ? '100%' : '0')};
     height: 2px;
     background-color: ${({ theme }) => theme.colors.primary};
-    transform: scaleX(${({ active }) => active ? 1 : 0});
-    transition: transform ${({ theme }) => theme.transition.default};
+    transition: width ${({ theme }) => theme.transition.default};
   }
   
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+  &:hover::after {
+    width: 100%;
   }
   
-  &:hover:after {
-    transform: scaleX(1);
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.spacing.xs};
+    font-size: 0.9rem;
   }
 `;
 
 const Header = React.memo(() => {
   const location = useLocation();
   
-  const navLinks = useMemo(() => [
+  const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/projects', label: 'Projects' },
     { path: '/work-history', label: 'Work History' },
     { path: '/services', label: 'Services' }
-  ], []);
+  ];
   
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo to="/">DAVIS SCHWENKE</Logo>
+        <Logo>
+          <Link to="/">Davis Schwenke</Link>
+        </Logo>
+        
         <Nav>
-          {navLinks.map(link => (
+          {navLinks.map((link) => (
             <NavLink 
-              key={link.path}
+              key={link.path} 
               to={link.path} 
-              active={location.pathname === link.path ? 1 : 0}
+              isActive={location.pathname === link.path}
             >
               {link.label}
             </NavLink>

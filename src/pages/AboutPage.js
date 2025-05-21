@@ -6,60 +6,63 @@ const AboutContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.lg};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 const AboutTitle = styled.h1`
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
   font-size: 2.5rem;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: 2rem;
-  }
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: normal;
 `;
 
-const AboutCard = styled.div`
-  background-color: rgba(25, 25, 25, 0.7);
-  padding: ${({ theme }) => theme.spacing.lg};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+const AboutSection = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
-const AboutContent = styled.div`
-  line-height: 1.8;
-  
-  p {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-  }
-  
-  strong {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-`;
-
-const SkillsContainer = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.xl};
-`;
-
-const SkillsTitle = styled.h2`
+const SectionTitle = styled.h2`
   color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+`;
+
+const Text = styled.p`
+  color: ${({ theme }) => theme.colors.text};
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  font-size: 1.1rem;
   margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const SkillsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.md};
-`;
-
-const SkillTag = styled.span`
-  background-color: ${({ theme }) => theme.colors.primary};
+const List = styled.ul`
   color: ${({ theme }) => theme.colors.text};
-  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  font-size: 0.9rem;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  font-size: 1.1rem;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  
+  li {
+    margin-bottom: ${({ theme }) => theme.spacing.xs};
+    position: relative;
+    padding-left: ${({ theme }) => theme.spacing.md};
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      background-color: ${({ theme }) => theme.colors.primary};
+      border-radius: 50%;
+    }
+  }
 `;
 
 const AboutPage = () => {
@@ -67,43 +70,28 @@ const AboutPage = () => {
     <PageWrapper>
       <AboutContainer>
         <AboutTitle>About Me</AboutTitle>
-        <AboutCard>
-          <AboutContent>
-            <p>
-              I'm a <strong>product and operations leader</strong> with a passion for developing high-value
-              products and features that drive subscription growth and user engagement.
-            </p>
-            <p>
-              With experience across web browsers, mobile devices, and connected TVs,
-              I specialize in <strong>product discovery, development, and monetization strategies</strong>.
-            </p>
-            <p>
-              Throughout my career, I've been consistently recognized for outstanding results,
-              clear communication, and strong leadership skills, leading to promotions ahead of my peers.
-            </p>
-            <p>
-              When I'm not working on product strategy, you might find me tinkering with new technologies,
-              exploring data visualization, or brainstorming the next great digital experience.
-            </p>
-          </AboutContent>
-          
-          <SkillsContainer>
-            <SkillsTitle>Skills & Expertise</SkillsTitle>
-            <SkillsList>
-              <SkillTag>Product Management</SkillTag>
-              <SkillTag>Monetization Strategies</SkillTag>
-              <SkillTag>Subscription Growth</SkillTag>
-              <SkillTag>User Experience</SkillTag>
-              <SkillTag>A/B Testing</SkillTag>
-              <SkillTag>Product Discovery</SkillTag>
-              <SkillTag>Mobile Development</SkillTag>
-              <SkillTag>Web Development</SkillTag>
-              <SkillTag>TV Platforms</SkillTag>
-              <SkillTag>Agile Methodologies</SkillTag>
-              <SkillTag>Data Analysis</SkillTag>
-            </SkillsList>
-          </SkillsContainer>
-        </AboutCard>
+        
+        <AboutSection>
+          <Text>
+            With all the rage around AI these days, I wanted to try and build something for myself. 
+            I figured it could be a good way to highlight my past work, showcase my growing technical 
+            aptitude with AI, and all those types of things...
+          </Text>
+        </AboutSection>
+        
+        <AboutSection>
+          <SectionTitle>A little about me:</SectionTitle>
+          <List>
+            <li>I live in Colorado, with my lovely wife and dog</li>
+            <li>I love skiing, golfing, lifting, hunting, being outside, and all those generic things some guy who moved to Colorado likes doing.</li>
+          </List>
+        </AboutSection>
+        
+        <AboutSection>
+          <Text>
+            If you want to see stuff about my work and personal projects, check out the other pages!
+          </Text>
+        </AboutSection>
       </AboutContainer>
     </PageWrapper>
   );
