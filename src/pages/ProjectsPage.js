@@ -295,6 +295,8 @@ const ProjectsPage = () => {
             <Tag>Mobile</Tag>
             <Tag>iOS</Tag>
             <Tag>Android</Tag>
+            <Tag>In-app payment integrations</Tag>
+            <Tag>React Native</Tag>
           </TagsContainer>
           <ProjectDescription>
             Redesigned purchase flows resulting in 25% higher conversion rates and improved user satisfaction scores. 
