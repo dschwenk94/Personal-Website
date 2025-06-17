@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="250" height="500" viewBox="0 0 250 500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="250" height="500" fill="#232A34"/>
+  <text x="125" y="250" font-family="Arial" font-size="24" text-anchor="middle" fill="white">Mobile Web</text>
+  <text x="125" y="280" font-family="Arial" font-size="24" text-anchor="middle" fill="white">Unsupported</text>
+</svg>
