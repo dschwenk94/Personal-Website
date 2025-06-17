@@ -25,12 +25,12 @@ const ProjectsTitle = styled.h1`
 const ProjectsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
+  gap: 0;
   max-width: 100%;
 `;
 
 const ProjectItem = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.xxl};
+  margin-bottom: 0;
 `;
 
 const ProjectTitle = styled.h2`
@@ -281,7 +281,7 @@ const Tag = styled.div`
 const ProjectDivider = styled.div`
   height: 1px;
   background-color: rgba(255, 255, 255, 0.2);
-  margin: ${({ theme }) => theme.spacing.xl} 0;
+  margin: ${({ theme }) => theme.spacing.lg} 0;
   width: 100%;
 `;
 
