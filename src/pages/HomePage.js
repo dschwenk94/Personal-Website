@@ -20,31 +20,34 @@ const TopSection = styled.div`
 `;
 
 // Neon Logo Animations - Scalable for future enhancements
-const neonFlicker = keyframes`
+const neonPulse = keyframes`
   0%, 100% { 
-    opacity: 1;
-    text-shadow: 
-      0 0 20px rgba(255, 87, 34, 0.8),
-      0 0 40px rgba(255, 87, 34, 0.6),
-      0 0 60px rgba(255, 87, 34, 0.4),
-      0 0 80px rgba(255, 87, 34, 0.2);
+    filter: brightness(1) contrast(1);
   }
   50% { 
-    opacity: 0.95;
-    text-shadow: 
-      0 0 25px rgba(255, 87, 34, 0.9),
-      0 0 45px rgba(255, 87, 34, 0.7),
-      0 0 65px rgba(255, 87, 34, 0.5),
-      0 0 85px rgba(255, 87, 34, 0.3);
+    filter: brightness(1.1) contrast(1.1);
   }
 `;
 
-const neonGlow = keyframes`
+const neonFlicker = keyframes`
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  95% { opacity: 0.9; }
+  96% { opacity: 1; }
+`;
+
+const glowPulse = keyframes`
   0%, 100% { 
-    filter: drop-shadow(0 0 20px rgba(255, 87, 34, 0.5));
+    filter: drop-shadow(0 0 20px rgba(255, 87, 34, 0.8)) 
+            drop-shadow(0 0 40px rgba(255, 87, 34, 0.6))
+            drop-shadow(0 0 60px rgba(255, 87, 34, 0.4));
   }
   50% { 
-    filter: drop-shadow(0 0 30px rgba(255, 87, 34, 0.7));
+    filter: drop-shadow(0 0 25px rgba(255, 87, 34, 0.9)) 
+            drop-shadow(0 0 50px rgba(255, 87, 34, 0.7))
+            drop-shadow(0 0 70px rgba(255, 87, 34, 0.5));
   }
 `;
 
@@ -55,69 +58,124 @@ const NeonLogoWrapper = styled.div`
   position: relative;
   display: inline-block;
   margin-bottom: ${({ theme }) => theme.spacing.xl};
+  animation: ${glowPulse} 4s ease-in-out infinite;
 `;
 
-// Main logo text - using text-fill and stroke properly to avoid double lines
-const NeonLogo = styled.div`
-  font-size: 200px;
-  font-weight: 800;
-  letter-spacing: 0px; /* Increased spacing to prevent overlap */
-  color: #FF5722; /* Base color for the fill */
-  position: relative;
-  padding-bottom: 40px;
-  line-height: 0.9;
-  display: inline-block;
-  font-family: ${({ theme }) => theme.fonts.heading};
+// SVG Neon Logo Component
+const NeonLogoSVG = styled.svg`
+  width: 400px;
+  height: 220px;
+  animation: ${neonPulse} 4s ease-in-out infinite,
+             ${neonFlicker} 10s ease-in-out infinite;
   
-  /* Main neon effect */
-  text-shadow: 
-    0 0 20px rgba(255, 87, 34, 0.8),
-    0 0 40px rgba(255, 87, 34, 0.6),
-    0 0 60px rgba(255, 87, 34, 0.4),
-    0 0 80px rgba(255, 87, 34, 0.2);
-  
-  /* Subtle animation */
-  animation: ${neonFlicker} 4s ease-in-out infinite;
-  
-  /* Responsive sizing */
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: 140px;
-    letter-spacing: 0px;
+    width: 280px;
+    height: 154px;
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: 100px;
-    letter-spacing: 0px;
+    width: 200px;
+    height: 110px;
   }
 `;
 
-// Separate glow layer to avoid stroke conflicts
-const NeonGlowLayer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 200px;
-  font-weight: 800;
-  letter-spacing: 0px;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-  text-stroke: 1px rgba(255, 255, 255, 0.6);
-  z-index: 2;
-  pointer-events: none;
-  line-height: 0.9;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  animation: ${neonGlow} 3s ease-in-out infinite;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: 140px;
-    letter-spacing: 0px;
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: 100px;
-    letter-spacing: 0px;
-  }
-`;
+// Neon text effect styles
+const neonTextStyle = {
+  fill: 'none',
+  strokeWidth: '3',
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+};
+
+// Component for the SVG Logo
+const NeonLogo = () => (
+  <NeonLogoSVG viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      {/* Glow filter for the neon effect */}
+      <filter id="neonGlow">
+        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      
+      {/* Gradient for the stroke */}
+      <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FF5722" stopOpacity="0.8"/>
+        <stop offset="50%" stopColor="#FF7043" stopOpacity="1"/>
+        <stop offset="100%" stopColor="#FF5722" stopOpacity="0.8"/>
+      </linearGradient>
+    </defs>
+    
+    {/* Background glow layers */}
+    <g filter="url(#neonGlow)">
+      {/* Outer glow */}
+      <text
+        x="200"
+        y="150"
+        fontSize="180"
+        fontWeight="800"
+        fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        textAnchor="middle"
+        {...neonTextStyle}
+        stroke="#FF5722"
+        strokeWidth="1"
+        opacity="0.5"
+      >
+        DS
+      </text>
+      
+      {/* Middle glow */}
+      <text
+        x="200"
+        y="150"
+        fontSize="180"
+        fontWeight="800"
+        fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        textAnchor="middle"
+        {...neonTextStyle}
+        stroke="#FF7043"
+        strokeWidth="2"
+        opacity="0.7"
+      >
+        DS
+      </text>
+      
+      {/* Main neon tube */}
+      <text
+        x="200"
+        y="150"
+        fontSize="180"
+        fontWeight="800"
+        fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        textAnchor="middle"
+        {...neonTextStyle}
+        stroke="rgba(255, 255, 255, 0.9)"
+        strokeWidth="2.5"
+      >
+        DS
+      </text>
+      
+      {/* Inner bright line */}
+      <text
+        x="200"
+        y="150"
+        fontSize="180"
+        fontWeight="800"
+        fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        textAnchor="middle"
+        {...neonTextStyle}
+        stroke="rgba(255, 255, 255, 1)"
+        strokeWidth="1"
+        opacity="0.8"
+      >
+        DS
+      </text>
+    </g>
+  </NeonLogoSVG>
+);
 
 const NeonUnderline = styled.div`
   position: absolute;
@@ -207,8 +265,7 @@ const HomePage = () => {
       <HomeContainer>
         <TopSection>
           <NeonLogoWrapper>
-            <NeonLogo>DS</NeonLogo>
-            <NeonGlowLayer aria-hidden="true">DS</NeonGlowLayer>
+            <NeonLogo />
             <NeonUnderline />
           </NeonLogoWrapper>
           
