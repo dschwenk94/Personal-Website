@@ -242,20 +242,48 @@ const ButtonContainer = styled.div`
 const NavButton = styled(Link)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.xl};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-size: 1rem;
-  letter-spacing: 0.02em;
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
   transition: all ${({ theme }) => theme.transition.default};
   text-decoration: none;
   text-align: center;
-  min-width: 150px;
+  min-width: 180px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  
+  /* Subtle gradient overlay */
+  background-image: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondary};
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
     color: ${({ theme }) => theme.colors.text};
+  }
+  
+  /* Add a subtle glow on hover */
+  &:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: 1rem;
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+    min-width: 160px;
   }
 `;
 

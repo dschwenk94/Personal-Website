@@ -288,7 +288,6 @@ const ProjectsPage = () => {
         <ProjectItem>
           <ProjectTitle>In-App Purchase Optimization</ProjectTitle>
           <TagsContainer>
-            <Tag>Mobile</Tag>
             <Tag>iOS</Tag>
             <Tag>Android</Tag>
             <Tag>In-app payment integrations</Tag>
@@ -469,10 +468,10 @@ const ProjectsPage = () => {
             <Tag>YouTube API</Tag>
           </TagsContainer>
           <ProjectDescription>
-            Clippy automatically transforms long YouTube videos into viral shorts with AI-powered editing. It identifies the best moments, tracks speakers, and adds dynamic captions that sync perfectly with speech. Content creators can edit captions in real-time and upload directly to YouTube with one click.
+            Clippy was a side project I started (with help from Claude + MCP integrations) to try and automatically generate captioned short form videos and quickly upload them to Youtube & TikTok. I'm still working on the TikTok integration, but I've got it working well for Youtube.
           </ProjectDescription>
           <ProjectDescription>
-            Built a complete video processing pipeline that analyzes content for viral potential, automatically crops to follow speakers, and generates engaging captions. The system has helped creators generate over 50,000 annual subscriptions through optimized short-form content.
+            The app automatically transforms long YouTube videos into viral shorts with AI-powered editing. It identifies the best moments, tracks speakers, and adds dynamic captions that sync perfectly with speech. Content creators can edit captions in real-time and upload directly to YouTube with one click. Key features include intelligent peak detection for viral moments, multi-speaker diarization with automatic frame cropping, and a sophisticated caption system that creates engaging, perfectly-timed subtitles.
           </ProjectDescription>
           
           <ProjectImageContainer $isDesktop>
@@ -543,9 +542,6 @@ const ProjectsPage = () => {
             </ImageColumn>
           </ProjectImageContainer>
           
-          <ProjectDescription>
-            Key features include intelligent peak detection for viral moments, multi-speaker diarization with automatic frame cropping, and a sophisticated caption system that creates engaging, perfectly-timed subtitles. The platform supports multiple users with OAuth authentication and provides a seamless workflow from URL to published short.
-          </ProjectDescription>
           <ProjectLink href="https://github.com/dschwenk94/Clippy" target="_blank" rel="noopener noreferrer">
             GitHub
           </ProjectLink>

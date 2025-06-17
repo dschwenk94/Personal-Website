@@ -28,6 +28,7 @@ const theme = {
     md: '1rem',
     lg: '2rem',
     xl: '3rem',
+    xxl: '4rem',
   },
   breakpoints: {
     sm: '576px',
