@@ -278,6 +278,13 @@ const Tag = styled.div`
   }
 `;
 
+const ProjectDivider = styled.div`
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: ${({ theme }) => theme.spacing.xl} 0;
+  width: 100%;
+`;
+
 const ProjectsPage = () => {
   return (
     <PageWrapper>
@@ -380,6 +387,8 @@ const ProjectsPage = () => {
           </ProjectLink>
         </ProjectItem>
         
+        <ProjectDivider />
+        
         {/* watch.sling.com Mobile Web Support */}
         <ProjectItem>
           <ProjectTitle>watch.sling.com Mobile Web Optimization</ProjectTitle>
@@ -448,6 +457,8 @@ const ProjectsPage = () => {
             Visit Site
           </ProjectLink>
         </ProjectItem>
+        
+        <ProjectDivider />
         
         {/* Clippy - AI YouTube Shorts Generator */}
         <ProjectItem>
@@ -539,6 +550,8 @@ const ProjectsPage = () => {
             GitHub
           </ProjectLink>
         </ProjectItem>
+        
+        <ProjectDivider />
         
         {/* AI-Powered Personal Website */}
         <ProjectItem>

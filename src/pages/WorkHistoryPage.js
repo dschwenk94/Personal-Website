@@ -91,7 +91,7 @@ const JobResponsibilities = styled.ul`
 
 const CompanyDivider = styled.div`
   height: 1px;
-  background-color: rgba(255, 87, 34, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   margin: ${({ theme }) => theme.spacing.md} 0 ${({ theme }) => theme.spacing.md} 0;
   width: 100%;
 `;
@@ -107,7 +107,7 @@ const WorkHistoryPage = () => {
         <JobHeader>
           <JobTitle>Product Manager - VIZIO / Walmart Account</JobTitle>
           <div>
-            <JobCompany>VIZIO / Walmart<JobLocation>Remote</JobLocation></JobCompany>
+            <JobCompany>VIZIO / Walmart<JobLocation>Denver, CO</JobLocation></JobCompany>
             <JobPeriod>December 2024 - Present</JobPeriod>
           </div>
         </JobHeader>
@@ -246,7 +246,8 @@ const WorkHistoryPage = () => {
             Microsoft Office & Project. JIRA. Sprinklr. Launch Darkly. Tableau. Adobe Analytics. Quantum Metric. Qualtrics. 
             UserZoom. User Interviews. Agile Methodologies. SQL. Python. Tableau. ​​Conviva. Google Developer Console. 
             Amazon Developer Console. Google Analytics. Responsive Design. A/B Testing. Product Discovery. 
-            Mobile & Web Development. Apple/Google/Amazon Billing Integrations.
+            Mobile & Web Development. Apple/Google/Amazon Billing Integrations. AI Tools (Claude, ChatGPT, GitHub Copilot). 
+            Model Context Protocol (MCP) integrations. AI-assisted development workflows. Prompt engineering.
           </p>
         </JobDescription>
       </JobSection>
