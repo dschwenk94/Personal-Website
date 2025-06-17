@@ -75,6 +75,7 @@ const NavLink = styled(Link)`
 
 const Header = React.memo(() => {
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
   
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -86,7 +87,8 @@ const Header = React.memo(() => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo to="/">DAVIS SCHWENKE</Logo>
+        {!isHomePage && <Logo to="/">DAVIS SCHWENKE</Logo>}
+        {isHomePage && <div style={{ width: '1px' }} />} {/* Spacer to maintain layout */}
         <Nav>
           {navLinks.map(link => (
             <NavLink 

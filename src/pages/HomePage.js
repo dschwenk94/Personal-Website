@@ -59,30 +59,30 @@ const NeonLogoWrapper = styled.div`
 const NeonLogo = styled.div`
   font-size: 200px;
   font-weight: 800;
-  letter-spacing: -20px;
+  letter-spacing: -10px; /* Reduced from -20px to prevent overlap */
   color: transparent;
-  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.9);
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9); /* Reduced stroke width */
   position: relative;
   text-shadow: 
     0 0 80px rgba(255, 87, 34, 0.5),
     0 0 120px rgba(255, 87, 34, 0.3);
   animation: ${neonPulse} 4s ease-in-out infinite;
   padding-bottom: 40px;
-  line-height: 0.8;
+  line-height: 0.9; /* Slightly increased for better spacing */
   display: inline-block;
   /* Fix for stroke rendering issues */
   paint-order: stroke fill;
-  stroke-linejoin: round;
-  stroke-linecap: round;
+  stroke-linejoin: miter; /* Changed to miter for cleaner corners */
+  stroke-linecap: square; /* Changed to square for cleaner corners */
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: 140px;
-    letter-spacing: -15px;
+    letter-spacing: -7px; /* Reduced from -15px */
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 100px;
-    letter-spacing: -10px;
+    letter-spacing: -5px; /* Reduced from -10px */
   }
   
   &::before {
@@ -90,7 +90,7 @@ const NeonLogo = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    -webkit-text-stroke: 3px #FF5722;
+    -webkit-text-stroke: 2px #FF5722; /* Reduced stroke width */
     filter: blur(3px);
     opacity: 0.8;
     animation: ${neonGlowPulse} 3s ease-in-out infinite;
@@ -116,10 +116,9 @@ const NeonLogo = styled.div`
 const NeonUnderline = styled.div`
   position: absolute;
   bottom: 10px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 90%;
+  left: 50%;
+  transform: translateX(-50%); /* Center the underline */
+  width: 80%; /* Reduced width for better proportion */
   height: 6px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 
