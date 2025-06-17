@@ -19,33 +19,34 @@ const TopSection = styled.div`
   width: 100%;
 `;
 
-// Neon Logo Animations
-const neonPulse = keyframes`
+// Neon Logo Animations - Scalable for future enhancements
+const neonFlicker = keyframes`
   0%, 100% { 
-    filter: brightness(1);
+    opacity: 1;
+    text-shadow: 
+      0 0 20px rgba(255, 87, 34, 0.8),
+      0 0 40px rgba(255, 87, 34, 0.6),
+      0 0 60px rgba(255, 87, 34, 0.4),
+      0 0 80px rgba(255, 87, 34, 0.2);
   }
   50% { 
-    filter: brightness(1.1);
+    opacity: 0.95;
+    text-shadow: 
+      0 0 25px rgba(255, 87, 34, 0.9),
+      0 0 45px rgba(255, 87, 34, 0.7),
+      0 0 65px rgba(255, 87, 34, 0.5),
+      0 0 85px rgba(255, 87, 34, 0.3);
   }
 `;
 
-const neonGlowPulse = keyframes`
+const neonGlow = keyframes`
   0%, 100% { 
-    filter: blur(3px) brightness(1);
-    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 87, 34, 0.5));
   }
   50% { 
-    filter: blur(5px) brightness(1.3);
-    transform: scale(1.01);
+    filter: drop-shadow(0 0 30px rgba(255, 87, 34, 0.7));
   }
 `;
-
-const neonSweep = keyframes`
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-`;
-
-// Removed underline animations for cleaner look
 
 
 
@@ -56,60 +57,65 @@ const NeonLogoWrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
+// Main logo text - using text-fill and stroke properly to avoid double lines
 const NeonLogo = styled.div`
   font-size: 200px;
   font-weight: 800;
-  letter-spacing: -10px; /* Reduced from -20px to prevent overlap */
-  color: transparent;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9); /* Reduced stroke width */
+  letter-spacing: 0px; /* Increased spacing to prevent overlap */
+  color: #FF5722; /* Base color for the fill */
   position: relative;
-  text-shadow: 
-    0 0 80px rgba(255, 87, 34, 0.5),
-    0 0 120px rgba(255, 87, 34, 0.3);
-  animation: ${neonPulse} 4s ease-in-out infinite;
   padding-bottom: 40px;
-  line-height: 0.9; /* Slightly increased for better spacing */
+  line-height: 0.9;
   display: inline-block;
-  /* Fix for stroke rendering issues */
-  paint-order: stroke fill;
-  stroke-linejoin: miter; /* Changed to miter for cleaner corners */
-  stroke-linecap: square; /* Changed to square for cleaner corners */
+  font-family: ${({ theme }) => theme.fonts.heading};
   
+  /* Main neon effect */
+  text-shadow: 
+    0 0 20px rgba(255, 87, 34, 0.8),
+    0 0 40px rgba(255, 87, 34, 0.6),
+    0 0 60px rgba(255, 87, 34, 0.4),
+    0 0 80px rgba(255, 87, 34, 0.2);
+  
+  /* Subtle animation */
+  animation: ${neonFlicker} 4s ease-in-out infinite;
+  
+  /* Responsive sizing */
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: 140px;
-    letter-spacing: -7px; /* Reduced from -15px */
+    letter-spacing: 0px;
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 100px;
-    letter-spacing: -5px; /* Reduced from -10px */
+    letter-spacing: 0px;
+  }
+`;
+
+// Separate glow layer to avoid stroke conflicts
+const NeonGlowLayer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 200px;
+  font-weight: 800;
+  letter-spacing: 0px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
+  text-stroke: 1px rgba(255, 255, 255, 0.6);
+  z-index: 2;
+  pointer-events: none;
+  line-height: 0.9;
+  font-family: ${({ theme }) => theme.fonts.heading};
+  animation: ${neonGlow} 3s ease-in-out infinite;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: 140px;
+    letter-spacing: 0px;
   }
   
-  &::before {
-    content: 'DS';
-    position: absolute;
-    left: 0;
-    top: 0;
-    -webkit-text-stroke: 2px #FF5722; /* Reduced stroke width */
-    filter: blur(3px);
-    opacity: 0.8;
-    animation: ${neonGlowPulse} 3s ease-in-out infinite;
-  }
-  
-  &::after {
-    content: 'DS';
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: linear-gradient(45deg, 
-      transparent 30%,
-      rgba(255, 87, 34, 0.1) 50%,
-      transparent 70%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-text-stroke: 0;
-    animation: ${neonSweep} 3s linear infinite;
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: 100px;
+    letter-spacing: 0px;
   }
 `;
 
@@ -202,6 +208,7 @@ const HomePage = () => {
         <TopSection>
           <NeonLogoWrapper>
             <NeonLogo>DS</NeonLogo>
+            <NeonGlowLayer aria-hidden="true">DS</NeonGlowLayer>
             <NeonUnderline />
           </NeonLogoWrapper>
           
