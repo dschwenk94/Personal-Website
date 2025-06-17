@@ -294,9 +294,7 @@ const ProjectsPage = () => {
             <Tag>React Native</Tag>
           </TagsContainer>
           <ProjectDescription>
-            Redesigned purchase flows resulting in 25% higher conversion rates and improved user satisfaction scores. 
-            Implemented A/B testing framework to continuously optimize the conversion funnel and increase revenue through 
-            content-driven iOS & Android mobile purchase flows using Apple & Google billing integrations.
+            Released content-driven in-app purchase flows for the Sling mobile apps, utilizing Apple & Google billing integrations. Improved and expanded capabilities through in-app offers and experimentation, focusing on data-driven decisions to maximize both new subscription acquisition and existing customer upsells.
           </ProjectDescription>
           
           <ProjectImageContainer>
@@ -324,7 +322,7 @@ const ProjectsPage = () => {
                   loading="lazy" 
                 />
               </ProjectImage>
-              <ImageLabel>1.1. Content Details</ImageLabel>
+              <ImageLabel>2. Content Details</ImageLabel>
               <ImageDescription>
                 Show details with subscription options
               </ImageDescription>
@@ -340,7 +338,7 @@ const ProjectsPage = () => {
                   loading="lazy" 
                 />
               </ProjectImage>
-              <ImageLabel>2. Account Creation</ImageLabel>
+              <ImageLabel>3. Account Creation</ImageLabel>
               <ImageDescription>
                 Streamlined sign-up experience
               </ImageDescription>
@@ -356,18 +354,12 @@ const ProjectsPage = () => {
                   loading="lazy" 
                 />
               </ProjectImage>
-              <ImageLabel>3. Purchase Confirmation</ImageLabel>
+              <ImageLabel>4. Purchase Confirmation</ImageLabel>
               <ImageDescription>
                 Apple/Google billing integration
               </ImageDescription>
             </ImageColumn>
           </ProjectImageContainer>
-          
-          <ProjectDescription>
-            Released content-driven mobile purchase flows optimized for user conversion. Improved and expanded capabilities through 
-            in-app offers and experimentation, focusing on data-driven decisions to maximize both new subscription acquisition 
-            and existing customer upsells.
-          </ProjectDescription>
           
           <ProjectStats>
             <StatItem>
@@ -468,10 +460,7 @@ const ProjectsPage = () => {
             <Tag>YouTube API</Tag>
           </TagsContainer>
           <ProjectDescription>
-            Clippy was a side project I started (with help from Claude + MCP integrations) to try and automatically generate captioned short form videos and quickly upload them to Youtube & TikTok. I'm still working on the TikTok integration, but I've got it working well for Youtube.
-          </ProjectDescription>
-          <ProjectDescription>
-            The app automatically transforms long YouTube videos into viral shorts with AI-powered editing. It identifies the best moments, tracks speakers, and adds dynamic captions that sync perfectly with speech. Content creators can edit captions in real-time and upload directly to YouTube with one click. Key features include intelligent peak detection for viral moments, multi-speaker diarization with automatic frame cropping, and a sophisticated caption system that creates engaging, perfectly-timed subtitles.
+            Clippy was a side project I started (with help from Claude + MCP integrations) to automatically generate captioned short form videos and quickly upload them to Youtube & TikTok. I'm still working on the TikTok integration, but I've got it working well for Youtube.
           </ProjectDescription>
           
           <ProjectImageContainer $isDesktop>
@@ -541,6 +530,10 @@ const ProjectsPage = () => {
               </ImageDescription>
             </ImageColumn>
           </ProjectImageContainer>
+          
+          <ProjectDescription>
+            The app automatically transforms long YouTube videos into viral shorts with AI-powered editing. It identifies the best moments, tracks speakers, and adds dynamic captions that sync perfectly with speech. Content creators can edit captions in real-time and upload directly to YouTube with one click. Key features include intelligent peak detection for viral moments, multi-speaker diarization with automatic frame cropping, and a sophisticated caption system that creates engaging, perfectly-timed subtitles.
+          </ProjectDescription>
           
           <ProjectLink href="https://github.com/dschwenk94/Clippy" target="_blank" rel="noopener noreferrer">
             GitHub
